@@ -25,7 +25,6 @@ namespace tagVisualizationTest
     /// </summary>
     public partial class SurfaceWindow1 : SurfaceWindow
     {
-
         Image[] imgArray = new Image[10];
         Rectangle[] rectArray = new Rectangle[10];
         /// <summary>
@@ -138,10 +137,6 @@ namespace tagVisualizationTest
         private void stand_button_click(object sender, RoutedEventArgs s)
         {
             Console.WriteLine("Stand");
-
-            TimeSpan fadeInTime = new TimeSpan(0, 0, 0, 0, 500);
-            TimeSpan fadeOutTime = new TimeSpan(0, 0, 0, 0, 500);
-
             imgArray[0] = img1;
             imgArray[1] = img2;
             imgArray[2] = img3;
@@ -153,37 +148,60 @@ namespace tagVisualizationTest
             imgArray[8] = img9;
             imgArray[9] = img10;
 
-            Rectangle myRectangle = new Rectangle();
-            myRectangle.Width = 20;
-            myRectangle.Height = 20;
-            myRectangle.Fill = Brushes.White;
-
-            var fadeInAnimation = new DoubleAnimation(0d, fadeInTime);
-
-            fadeInAnimation.RepeatBehavior = new RepeatBehavior(count: 1);
-
-            Console.WriteLine("HERE");
-            var fadeOutAnimation = new DoubleAnimation(1d, fadeOutTime);
-
-            fadeOutAnimation.Completed += (o, e) =>
-                {
-                    for (int i = 0; i < 10; i++)
-                    {
-                        imgArray[i].Margin = new Thickness(1600, 300 + i*60, 0, 0);
-                        imgArray[i].BeginAnimation(Image.OpacityProperty, fadeInAnimation);
-                    }
-                    //myRectangle.BeginAnimation(Image.OpacityProperty, fadeInAnimation);
-                    //image2.BeginAnimation(Image.OpacityProperty, fadeInAnimation);
-                };
-
-            for (int i = 0; i < 10; i++)
+            string WhiteSpace = " ";
+            string result = "bet50";
+            string binary;
+            char[] binArray;
+            string transferString = result + WhiteSpace;
+            binArray = transferString.ToCharArray();
+            int location = 0;
+            while (location < binArray.Length)
             {
-                imgArray[i].Margin = new Thickness(1600, 300 + i * 20, 0, 0);
-                imgArray[i].BeginAnimation(Image.OpacityProperty, fadeOutAnimation);
+                binary = ConvertToBinary(binArray[location]);
+                blink(binary);
+                location++;
             }
-            //myRectangle.BeginAnimation(Image.OpacityProperty, fadeOutAnimation);
-            //image2.BeginAnimation(Image.OpacityProperty, fadeOutAnimation);
-           
+            
+
+        }
+
+        private void blink(string binary)
+        {
+            int binLength = binary.Length - 1;
+            
+            Console.WriteLine("HERE");
+            TimeSpan fadeInTime = new TimeSpan(0, 0, 0, 0, 500);
+            TimeSpan fadeOutTime = new TimeSpan(0, 0, 0, 0, 500);
+            var fadeInAnimation = new DoubleAnimation(0d, fadeInTime);
+            var fadeOutAnimation = new DoubleAnimation(1d, fadeOutTime);
+            fadeInAnimation.RepeatBehavior = new RepeatBehavior(count: 10);
+
+
+            for (int i = 0; i < binLength; i++)
+            {
+                    fadeOutAnimation.Completed += (o, e) =>
+                    {
+                        if (binary[i] == '1')
+                        {
+                            imgArray[i].Margin = new Thickness(1600, 300 + i * 60, 0, 0);
+                            imgArray[i].BeginAnimation(Image.OpacityProperty, fadeInAnimation);
+                        }
+                    };
+                    if (binary[i] == '1')
+                    {
+                        imgArray[i].Margin = new Thickness(1600, 300 + i * 60, 0, 0);
+                        imgArray[i].BeginAnimation(Image.OpacityProperty, fadeOutAnimation);
+                    }
+            }
+        }
+
+        public static string ConvertToBinary(char asciiString)
+        {
+            string result = string.Empty;
+
+            result += Convert.ToString((int)asciiString, 2);
+
+            return result;
         }
 
     }
