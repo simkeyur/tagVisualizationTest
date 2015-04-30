@@ -5,8 +5,8 @@
     Title="tagVisualizationTest"
     >
   <Grid>
-        <Image x:Name="img" Source="C:/Users/Administrator/Documents/GitHub/tagVisualizationTest/tagVisualizationTest/flash.png" Opacity="1" Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Center" Width="24" Height="24" Margin="287,68,217,0"/>
-        <Image x:Name="img2" Source="C:/Users/Administrator/Documents/GitHub/tagVisualizationTest/tagVisualizationTest/flash.png" Opacity="1" Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Center" Width="24" Height="24" Margin="2,68,217,0"/>
+        <Image x:Name="img1" Source="C:/flash.png" Opacity="0" Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Center" Width="24" Height="24"/>
+        <Image x:Name="img2" Source="C:/flash.png" Opacity="0" Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Center" Width="24" Height="24"/>
         <!--  
         <s:TagVisualizer Name="myTag"             
             VisualizationAdded="OnVisualizationAdded">

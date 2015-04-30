@@ -34,77 +34,10 @@ namespace tagVisualizationTest
 
             // Add handlers for window availability events
             AddWindowAvailabilityHandlers();
-           
-            Blink();
-
-          
-            
-            
-
-           
-            
-
-           /* RotateTransform rt = new RotateTransform();
-
-            //  "img" is Image added in XAML
-            img.RenderTransform = rt;
-            img.RenderTransformOrigin = new Point(0.5, 0.5);
-            rt.BeginAnimation(RotateTransform.AngleProperty, myanimation);*/
 
         }
 
-        public void Blink()
-        {
-            TimeSpan fadeInTime = new TimeSpan(0, 0, 0, 0, 100);
-            TimeSpan fadeOutTime = new TimeSpan(0, 0, 0, 0, 100);
-
-
-            Image image = img;
-            Image image2 = img2;
-          
-
-            var fadeInAnimation = new DoubleAnimation(0d, fadeInTime);
-
-            fadeInAnimation.RepeatBehavior = RepeatBehavior.Forever;
-
-            if (image.Source != null)
-            {
-                Console.WriteLine("HERE");
-                var fadeOutAnimation = new DoubleAnimation(1d, fadeOutTime);
-
-
-                fadeOutAnimation.Completed += (o, e) =>
-                {
-                    //image.Source = source;
-                    image.BeginAnimation(Image.OpacityProperty, fadeInAnimation);
-                    image2.BeginAnimation(Image.OpacityProperty, fadeInAnimation);
-                };
-
-                image.BeginAnimation(Image.OpacityProperty, fadeOutAnimation);
-                image2.BeginAnimation(Image.OpacityProperty, fadeOutAnimation);
-            }
-            else
-            {
-                image.Opacity = 1d;
-                image2.Opacity = 1d;
-                // image.Source = source;
-                image.BeginAnimation(Image.OpacityProperty, fadeInAnimation);
-                image2.BeginAnimation(Image.OpacityProperty, fadeInAnimation);
-            }
-        }
-        private void Image_Loaded(object sender, RoutedEventArgs e)
-        {
-          /*  // ... Create a new BitmapImage.
-            BitmapImage b = new BitmapImage();
-            b.BeginInit();
-            b.UriSource = new Uri("Bitmap1.bmp");
-            b.EndInit();
-
-            // ... Get Image reference from sender.
-            var image = sender as Image;
-            // ... Assign Source.
-            image.Source = b;*/
-        }
+       
 
 
         /// <summary>
@@ -199,9 +132,35 @@ namespace tagVisualizationTest
             Console.WriteLine("Bet");
         }
 
-        private void stand_button_click(object sender, RoutedEventArgs e)
+        private void stand_button_click(object sender, RoutedEventArgs s)
         {
             Console.WriteLine("Stand");
+
+            TimeSpan fadeInTime = new TimeSpan(0, 0, 0, 0, 100);
+            TimeSpan fadeOutTime = new TimeSpan(0, 0, 0, 0, 100);
+
+            Image image1 = img1;
+            Image image2 = img2;
+
+            image1.Margin = new Thickness(1600, 300, 0, 0);
+            image2.Margin = new Thickness(1700, 300, 0, 0);
+
+            var fadeInAnimation = new DoubleAnimation(0d, fadeInTime);
+
+            fadeInAnimation.RepeatBehavior = new RepeatBehavior(count: 10);
+
+            Console.WriteLine("HERE");
+            var fadeOutAnimation = new DoubleAnimation(1d, fadeOutTime);
+
+            fadeOutAnimation.Completed += (o, e) =>
+                {
+                    image1.BeginAnimation(Image.OpacityProperty, fadeInAnimation);
+                    image2.BeginAnimation(Image.OpacityProperty, fadeInAnimation);
+                };
+
+            image1.BeginAnimation(Image.OpacityProperty, fadeOutAnimation);
+            image2.BeginAnimation(Image.OpacityProperty, fadeOutAnimation);
+           
         }
 
     }
