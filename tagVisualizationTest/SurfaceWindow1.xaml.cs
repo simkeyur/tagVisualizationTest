@@ -25,6 +25,8 @@ namespace tagVisualizationTest
     /// </summary>
     public partial class SurfaceWindow1 : SurfaceWindow
     {
+
+        Image[] imgArray = new Image[10];
         /// <summary>
         /// Default constructor.
         /// </summary>
