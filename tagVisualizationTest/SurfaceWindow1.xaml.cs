@@ -16,6 +16,7 @@ using Microsoft.Surface.Core;
 using Microsoft.Surface.Presentation;
 using Microsoft.Surface.Presentation.Controls;
 using Microsoft.Surface.Presentation.Input;
+using System.Windows.Media.Animation;
 
 namespace tagVisualizationTest
 {
@@ -33,11 +34,67 @@ namespace tagVisualizationTest
 
             // Add handlers for window availability events
             AddWindowAvailabilityHandlers();
+           
+            Blink();
 
+          
+            
+            
+
+           
+            
+
+           /* RotateTransform rt = new RotateTransform();
+
+            //  "img" is Image added in XAML
+            img.RenderTransform = rt;
+            img.RenderTransformOrigin = new Point(0.5, 0.5);
+            rt.BeginAnimation(RotateTransform.AngleProperty, myanimation);*/
+
+        }
+
+        public void Blink()
+        {
+            TimeSpan fadeInTime = new TimeSpan(0, 0, 0, 0, 100);
+            TimeSpan fadeOutTime = new TimeSpan(0, 0, 0, 0, 100);
+
+
+            Image image = img;
+            Image image2 = img2;
+          
+
+            var fadeInAnimation = new DoubleAnimation(0d, fadeInTime);
+
+            fadeInAnimation.RepeatBehavior = RepeatBehavior.Forever;
+
+            if (image.Source != null)
+            {
+                Console.WriteLine("HERE");
+                var fadeOutAnimation = new DoubleAnimation(1d, fadeOutTime);
+
+
+                fadeOutAnimation.Completed += (o, e) =>
+                {
+                    //image.Source = source;
+                    image.BeginAnimation(Image.OpacityProperty, fadeInAnimation);
+                    image2.BeginAnimation(Image.OpacityProperty, fadeInAnimation);
+                };
+
+                image.BeginAnimation(Image.OpacityProperty, fadeOutAnimation);
+                image2.BeginAnimation(Image.OpacityProperty, fadeOutAnimation);
+            }
+            else
+            {
+                image.Opacity = 1d;
+                image2.Opacity = 1d;
+                // image.Source = source;
+                image.BeginAnimation(Image.OpacityProperty, fadeInAnimation);
+                image2.BeginAnimation(Image.OpacityProperty, fadeInAnimation);
+            }
         }
         private void Image_Loaded(object sender, RoutedEventArgs e)
         {
-            // ... Create a new BitmapImage.
+          /*  // ... Create a new BitmapImage.
             BitmapImage b = new BitmapImage();
             b.BeginInit();
             b.UriSource = new Uri("Bitmap1.bmp");
@@ -46,7 +103,7 @@ namespace tagVisualizationTest
             // ... Get Image reference from sender.
             var image = sender as Image;
             // ... Assign Source.
-            image.Source = b;
+            image.Source = b;*/
         }
 
 
