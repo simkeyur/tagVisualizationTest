@@ -139,29 +139,35 @@ namespace tagVisualizationTest
         {
             Console.WriteLine("Stand");
 
-            TimeSpan fadeInTime = new TimeSpan(0, 0, 0, 0, 100);
-            TimeSpan fadeOutTime = new TimeSpan(0, 0, 0, 0, 100);
+            TimeSpan fadeInTime = new TimeSpan(0, 0, 0, 0, 500);
+            TimeSpan fadeOutTime = new TimeSpan(0, 0, 0, 0, 500);
 
             imgArray[0] = img1;
             imgArray[1] = img2;
+            imgArray[2] = img3;
+            imgArray[3] = img4;
+            imgArray[4] = img5;
+            imgArray[5] = img6;
+            imgArray[6] = img7;
+            imgArray[7] = img8;
+            imgArray[8] = img9;
+            imgArray[9] = img10;
 
             Rectangle myRectangle = new Rectangle();
             myRectangle.Width = 20;
             myRectangle.Height = 20;
             myRectangle.Fill = Brushes.White;
 
-
-
             var fadeInAnimation = new DoubleAnimation(0d, fadeInTime);
 
-            fadeInAnimation.RepeatBehavior = new RepeatBehavior(count: 10);
+            fadeInAnimation.RepeatBehavior = new RepeatBehavior(count: 1);
 
             Console.WriteLine("HERE");
             var fadeOutAnimation = new DoubleAnimation(1d, fadeOutTime);
 
             fadeOutAnimation.Completed += (o, e) =>
                 {
-                    for (int i = 0; i < 2; i++)
+                    for (int i = 0; i < 10; i++)
                     {
                         imgArray[i].Margin = new Thickness(1600, 300 + i*60, 0, 0);
                         imgArray[i].BeginAnimation(Image.OpacityProperty, fadeInAnimation);
@@ -170,7 +176,7 @@ namespace tagVisualizationTest
                     //image2.BeginAnimation(Image.OpacityProperty, fadeInAnimation);
                 };
 
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < 10; i++)
             {
                 imgArray[i].Margin = new Thickness(1600, 300 + i * 20, 0, 0);
                 imgArray[i].BeginAnimation(Image.OpacityProperty, fadeOutAnimation);
