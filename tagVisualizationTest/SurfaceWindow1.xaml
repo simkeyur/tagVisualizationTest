@@ -5,7 +5,9 @@
     Title="tagVisualizationTest"
     >
   <Grid>
-      <!--
+        <Image x:Name="img" Source="C:/Users/Administrator/Documents/GitHub/tagVisualizationTest/tagVisualizationTest/flash.png" Opacity="1" Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Center" Width="24" Height="24" Margin="287,68,217,0"/>
+        <Image x:Name="img2" Source="C:/Users/Administrator/Documents/GitHub/tagVisualizationTest/tagVisualizationTest/flash.png" Opacity="1" Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Center" Width="24" Height="24" Margin="2,68,217,0"/>
+        <!--  
         <s:TagVisualizer Name="myTag"             
             VisualizationAdded="OnVisualizationAdded">
             <s:TagVisualizer.Definitions>
@@ -17,11 +19,11 @@
             </s:TagVisualizer.Definitions>
         </s:TagVisualizer>
         -->
-        <Image Source="C:/Users/surface/Documents/GitHub/animation/SurfaceApplication2/SurfaceApplication2Content/flash.png" Opacity="1" Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Center" Width="24" Height="24" Margin="1600,400,200,400">
+     <!--   <Image Source="C:/Users/Administrator/Documents/GitHub/tagVisualizationTest/tagVisualizationTest/flash.png" Opacity="1" Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Center" Width="24" Height="24" Margin="1600,400,200,400">
             <Image.Style>
                 <Style>
                     <Style.Triggers>
-                        <EventTrigger RoutedEvent="Image.MouseEnter">
+                        <EventTrigger RoutedEvent="Image.Loaded">
                             <BeginStoryboard>
                                 <Storyboard>
                                     <DoubleAnimation Storyboard.TargetProperty="(Image.Opacity)"
@@ -34,7 +36,7 @@
                     </Style.Triggers>
                 </Style>
             </Image.Style>
-        </Image>
+        </Image> -->
         <Border BorderBrush="Silver" BorderThickness="1" Height="1050" HorizontalAlignment="Left" Margin="0,0,0,0" Name="border1" VerticalAlignment="Top" Width="1500">
             <Button Content="Bet" Height="23" Name="button1" Width="75" VerticalContentAlignment="Center" Click="bet_button_Click" />
         </Border>
