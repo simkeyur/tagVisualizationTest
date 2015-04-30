@@ -27,6 +27,7 @@ namespace tagVisualizationTest
     {
 
         Image[] imgArray = new Image[10];
+        Rectangle[] rectArray = new Rectangle[10];
         /// <summary>
         /// Default constructor.
         /// </summary>
@@ -141,11 +142,15 @@ namespace tagVisualizationTest
             TimeSpan fadeInTime = new TimeSpan(0, 0, 0, 0, 100);
             TimeSpan fadeOutTime = new TimeSpan(0, 0, 0, 0, 100);
 
-            Image image1 = img1;
-            Image image2 = img2;
+            imgArray[0] = img1;
+            imgArray[1] = img2;
 
-            image1.Margin = new Thickness(1600, 300, 0, 0);
-            image2.Margin = new Thickness(1700, 300, 0, 0);
+            Rectangle myRectangle = new Rectangle();
+            myRectangle.Width = 20;
+            myRectangle.Height = 20;
+            myRectangle.Fill = Brushes.White;
+
+
 
             var fadeInAnimation = new DoubleAnimation(0d, fadeInTime);
 
@@ -156,12 +161,22 @@ namespace tagVisualizationTest
 
             fadeOutAnimation.Completed += (o, e) =>
                 {
-                    image1.BeginAnimation(Image.OpacityProperty, fadeInAnimation);
-                    image2.BeginAnimation(Image.OpacityProperty, fadeInAnimation);
+                    for (int i = 0; i < 2; i++)
+                    {
+                        imgArray[i].Margin = new Thickness(1600, 300 + i*60, 0, 0);
+                        imgArray[i].BeginAnimation(Image.OpacityProperty, fadeInAnimation);
+                    }
+                    //myRectangle.BeginAnimation(Image.OpacityProperty, fadeInAnimation);
+                    //image2.BeginAnimation(Image.OpacityProperty, fadeInAnimation);
                 };
 
-            image1.BeginAnimation(Image.OpacityProperty, fadeOutAnimation);
-            image2.BeginAnimation(Image.OpacityProperty, fadeOutAnimation);
+            for (int i = 0; i < 2; i++)
+            {
+                imgArray[i].Margin = new Thickness(1600, 300 + i * 20, 0, 0);
+                imgArray[i].BeginAnimation(Image.OpacityProperty, fadeOutAnimation);
+            }
+            //myRectangle.BeginAnimation(Image.OpacityProperty, fadeOutAnimation);
+            //image2.BeginAnimation(Image.OpacityProperty, fadeOutAnimation);
            
         }
 
